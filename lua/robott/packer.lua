@@ -11,12 +11,7 @@ return require('packer').startup(function(use)
     }
 
     -- colorscheme theme
-    use ({
-        'patstockwell/vim-monokai-tasty',
-        config = function()
-            vim.cmd('colorscheme vim-monokai-tasty')
-        end
-    })
+    use { "ellisonleao/gruvbox.nvim" }
 
     -- treesitter for parsing and color highlighting
     use {
@@ -27,11 +22,16 @@ return require('packer').startup(function(use)
         end,
     }
 
+    use { 'nvim-treesitter/playground' }
+
     -- lualine for custom status bar
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     }
+
+    -- indent lines
+    use { 'lukas-reineke/indent-blankline.nvim' }
 
     -- LSP 0
     use {
