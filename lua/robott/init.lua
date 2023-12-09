@@ -1,2 +1,2 @@
-require "robott.vim"
-require "robott.packer"
+require("robott.vim")
+require("robott.lazy")
