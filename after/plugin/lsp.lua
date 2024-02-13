@@ -18,12 +18,12 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
     ["<C-Space>"] = cmp.mapping.complete(),
 })
 
-lsp.set_sign_icons({
-    error = '✘',
-    warn = '▲',
-    hint = '⚑',
-    info = '»'
-})
+-- lsp.set_sign_icons({
+--     error = '✘',
+--     warn = '▲',
+--     hint = '⚑',
+--     info = '»'
+-- })
 
 
 lsp.setup()
