@@ -18,6 +18,12 @@ lspconfig.clangd.setup({
         "--clang-tidy",
     }
 })
+lspconfig.html.setup({
+    filetypes = {
+        'blade',
+        'php'
+    }
+})
 
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
