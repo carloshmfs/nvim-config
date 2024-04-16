@@ -6,8 +6,24 @@ lsp.on_attach(function(client, bufnr)
     lsp.default_keymaps({buffer = bufnr})
 end)
 
--- (Optional) Configure lua language server for neovim
-local lspconfig = require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+-- LSP configs
+local lspconfig = require('lspconfig')
+lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
+lspconfig.clangd.setup({
+    cmd = {
+        "clangd",
+        "--query-driver",
+        lspconfig.util.find_git_ancestor(vim.fn.getcwd()) .. '/Toolchain/Local/**/*',
+        "--header-insertion=never",
+        "--clang-tidy",
+    }
+})
+lspconfig.html.setup({
+    filetypes = {
+        'blade',
+        'php'
+    }
+})
 
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -18,12 +34,12 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
     ["<C-Space>"] = cmp.mapping.complete(),
 })
 
-lsp.set_sign_icons({
-    error = '✘',
-    warn = '▲',
-    hint = '⚑',
-    info = '»'
-})
+-- lsp.set_sign_icons({
+--     error = '✘',
+--     warn = '▲',
+--     hint = '⚑',
+--     info = '»'
+-- })
 
 
 lsp.setup()
