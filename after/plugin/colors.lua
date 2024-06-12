@@ -5,6 +5,10 @@ function color(color)
     vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "none" })
     vim.api.nvim_set_hl(0, "TelescopePreviewNormal", { bg = "none" })
     vim.api.nvim_set_hl(0, "TelescopeResultsNormal", { bg = "none" })
+
+    vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "none" })
+    -- vim.api.nvim_set_hl(0, "NvimTreeNormalFloat", { bg = "none" })
+
 end
 
 color("dracula")
