@@ -1,8 +1,22 @@
-local builtin = require "telescope.builtin"
+local builtin = require('telescope.builtin')
+local theme = require('telescope.themes').get_dropdown({
+    hidden = true,
+    no_ignore = true
+})
 
-vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
-vim.keymap.set("n", "<C-p>", builtin.git_files, {})
-vim.keymap.set("n", "<leader>po", builtin.lsp_document_symbols, {})
-vim.keymap.set("n", "<leader>ps", function ()
-   builtin.grep_string({ search = vim.fn.input("Find in files: ") })
+vim.keymap.set("n", "<leader>pf", function ()
+    builtin.find_files(theme)
 end)
+
+vim.keymap.set("n", "<C-p>", function ()
+    builtin.git_files(theme)
+end)
+
+vim.keymap.set("n", "<leader>po", function ()
+        builtin.lsp_document_symbols(theme)
+end)
+
+vim.keymap.set("n", "<leader>ps", function ()
+   builtin.grep_string({ search = vim.fn.input("Find in files: "), theme = theme })
+end)
+
