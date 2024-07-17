@@ -3,7 +3,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 vim.g.mapleader = " "
--- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>", { desc = "Open the parent dir" })
 
 vim.wo.number = true
 vim.wo.relativenumber = true
