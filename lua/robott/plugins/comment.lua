@@ -1,6 +1,5 @@
 return {
     'numToStr/Comment.nvim',
     lazy = false,
-    config = function()
-    end
+    opts = {}
 }
