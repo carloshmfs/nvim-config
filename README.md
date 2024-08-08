@@ -1,12 +1,14 @@
-# Requirements
+## Requirements
 
-* [GCC](https://gcc.gnu.org/) For treesitter parser compilation and telescope fuzzy finder.
+* [RipGrep](https://github.com/BurntSushi/ripgrep) For Telescope grep_string feature.
 
-* [CMake](https://cmake.org/download/) For compiling the telescope native fuzy finder.
+* [GCC](https://gcc.gnu.org/) For treesitter parser compilation and telescope native fuzzy finder.
 
-# Installation
+* [CMake](https://cmake.org/download/) For building the telescope native fuzy finder.
+
+## Installation
 
 ```bash
-git clone https://github.com/robott11/nvim-config.git ~/.config/nvim
+git clone https://github.com/carloshmfs/nvim-config.git ~/.config/nvim
 ```
 
