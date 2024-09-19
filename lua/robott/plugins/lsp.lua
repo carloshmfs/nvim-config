@@ -23,15 +23,15 @@ return {
         -- LSP configs
         local lspconfig = require('lspconfig')
         lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
-        lspconfig.clangd.setup({
-            cmd = {
-                "clangd",
-                "--query-driver",
-                lspconfig.util.find_git_ancestor(vim.fn.getcwd()) .. '/Toolchain/Local/**/*',
-                "--header-insertion=never",
-                "--clang-tidy",
-            }
-        })
+        -- lspconfig.clangd.setup({
+        --     cmd = {
+        --         "clangd",
+        --         "--query-driver",
+        --         lspconfig.util.find_git_ancestor(vim.fn.getcwd()) .. '/Toolchain/Local/**/*',
+        --         "--header-insertion=never",
+        --         "--clang-tidy",
+        --     }
+        -- })
         lspconfig.html.setup({
             filetypes = {
                 'blade',
