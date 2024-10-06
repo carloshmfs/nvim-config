@@ -6,6 +6,8 @@
 
 * [CMake](https://cmake.org/download/) For building the telescope native fuzy finder.
 
+* MinGW for windows builds
+
 ## Installation
 
 ```bash

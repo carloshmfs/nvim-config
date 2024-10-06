@@ -4,7 +4,19 @@ return {
         { "nvim-lua/plenary.nvim" },
         {
             'nvim-telescope/telescope-fzf-native.nvim',
-            build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release'
+            build = function()
+                local cmd = ""
+                local plugin_dir = vim.fn.stdpath("data") .. "/lazy/telescope-fzf-native.nvim"
+                vim.cmd("cd " .. plugin_dir)
+
+                if vim.loop.os_uname().sysname == "Windows_NT" then
+                    cmd = 'cmake -S. -Bbuild -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release'
+                else
+                    cmd = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release'
+                end
+
+                vim.fn.system(cmd)
+            end
         }
     },
     config = function()
