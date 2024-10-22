@@ -8,7 +8,7 @@ function color(color)
 
     vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "none" })
     -- vim.api.nvim_set_hl(0, "NvimTreeNormalFloat", { bg = "none" })
-
+    vim.api.nvim_set_hl(0, "TelescopePreviewLine", { fg = "#f0df29", bg = "#7da3f0", bold = true })
 end
 
 color("dracula")
