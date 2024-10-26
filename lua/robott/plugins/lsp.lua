@@ -1,60 +1,70 @@
 return {
-    'VonHeikemen/lsp-zero.nvim', branch = 'v2.x',
+    'VonHeikemen/lsp-zero.nvim', branch = 'v4.x',
     dependencies = {
-        -- LSP Support
-        {'neovim/nvim-lspconfig'},             -- Required
-        {'williamboman/mason.nvim'},           -- Optional
-        {'williamboman/mason-lspconfig.nvim'}, -- Optional
+        {'neovim/nvim-lspconfig'},
+        {'hrsh7th/nvim-cmp'},
+        {'hrsh7th/cmp-nvim-lsp'},
 
-        -- Autocompletion
-        {'hrsh7th/nvim-cmp'},     -- Required
-        {'hrsh7th/cmp-nvim-lsp'}, -- Required
-        {'L3MON4D3/LuaSnip'},     -- Required
+        {'williamboman/mason.nvim'},
+        {'williamboman/mason-lspconfig.nvim'},
+        {'L3MON4D3/LuaSnip'},
      },
     config = function ()
-        local lsp = require('lsp-zero').preset({})
+        local lsp_zero = require("lsp-zero")
 
-        lsp.on_attach(function(client, bufnr)
-            -- see :help lsp-zero-keybindings
-            -- to learn the available actions
-            lsp.default_keymaps({buffer = bufnr})
-        end)
+        vim.opt.signcolumn = 'yes'
 
-        -- LSP configs
-        local lspconfig = require('lspconfig')
-        lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
-        -- lspconfig.clangd.setup({
-        --     cmd = {
-        --         "clangd",
-        --         "--query-driver",
-        --         lspconfig.util.find_git_ancestor(vim.fn.getcwd()) .. '/Toolchain/Local/**/*',
-        --         "--header-insertion=never",
-        --         "--clang-tidy",
-        --     }
-        -- })
-        lspconfig.html.setup({
-            filetypes = {
-                'blade',
-                'php'
+        local lspconfig_defaults = require('lspconfig').util.default_config
+        lspconfig_defaults.capabilities = vim.tbl_deep_extend(
+            'force',
+            lspconfig_defaults.capabilities,
+            require('cmp_nvim_lsp').default_capabilities()
+        )
+
+        vim.api.nvim_create_autocmd('LspAttach', {
+            desc = 'LSP actions',
+            callback = function(event)
+                local opts = {buffer = event.buf}
+
+                vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+                vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+                vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
+                vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
+                vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
+                vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+                vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+                vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+                vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+                vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+            end,
+        })
+
+        require("mason").setup({})
+        require("mason-lspconfig").setup({
+            ensure_installed = { "lua_ls", "phpactor", "clangd" },
+            handlers = {
+                function(server_name)
+                    require("lspconfig").lua_ls.setup({
+                        on_init = function(client)
+                            lsp_zero.nvim_lua_settings(client, {})
+                        end,
+                    })
+                end,
             }
         })
 
-        local cmp = require("cmp")
-        local cmp_select = { behavior = cmp.SelectBehavior.Select }
-        local cmp_mappings = lsp.defaults.cmp_mappings({
-            ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-            ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-            ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-            ["<C-Space>"] = cmp.mapping.complete(),
+        local cmp = require('cmp')
+
+        cmp.setup({
+            sources = {
+                { name = 'nvim_lsp' },
+            },
+            snippet = {
+                expand = function(args)
+                    vim.snippet.expand(args.body)
+                end,
+            },
+            mapping = cmp.mapping.preset.insert({}),
         })
-
-        -- lsp.set_sign_icons({
-        --     error = '✘',
-        --     warn = '▲',
-        --     hint = '⚑',
-        --     info = '»'
-        -- })
-
-        lsp.setup()
     end
 }
