@@ -74,7 +74,12 @@ return {
                     })
 
                     lspconfig.phpactor.setup({})
-                    lspconfig.clangd.setup({})
+                    lspconfig.clangd.setup({
+                        cmd = {
+                            "clangd",
+                            "--header-insertion=never"
+                        }
+                    })
                 end,
             }
         })
