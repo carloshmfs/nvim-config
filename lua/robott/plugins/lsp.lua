@@ -74,6 +74,7 @@ return {
                     })
 
                     lspconfig.phpactor.setup({})
+                    lspconfig.clangd.setup({})
                 end,
             }
         })
