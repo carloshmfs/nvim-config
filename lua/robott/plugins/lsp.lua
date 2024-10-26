@@ -44,11 +44,15 @@ return {
             ensure_installed = { "lua_ls", "phpactor", "clangd" },
             handlers = {
                 function(server_name)
-                    require("lspconfig").lua_ls.setup({
+                    local lspconfig = require("lspconfig")
+
+                    lspconfig.lua_ls.setup({
                         on_init = function(client)
                             lsp_zero.nvim_lua_settings(client, {})
                         end,
                     })
+
+                    lspconfig.phpactor.setup({})
                 end,
             }
         })
