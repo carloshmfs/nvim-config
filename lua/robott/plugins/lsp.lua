@@ -74,11 +74,21 @@ return {
                     })
 
                     lspconfig.phpactor.setup({})
+
                     lspconfig.clangd.setup({
                         cmd = {
                             "clangd",
                             "--header-insertion=never"
                         }
+                    })
+
+                    lspconfig.volar.setup({
+                        filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+                        init_options = {
+                            vue = {
+                                hybridMode = false,
+                            },
+                        },
                     })
                 end,
             }
