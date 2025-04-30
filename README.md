@@ -1,14 +1,16 @@
 ## Requirements
 
-* [Nvim](https://github.com/neovim/neovim) This config was made for the v0.10.2
+* [Nvim](https://github.com/neovim/neovim) This config was made for the v0.10.2.
 
-* [RipGrep](https://github.com/BurntSushi/ripgrep) A text search tool for some Telescope features
+* [FZF](https://github.com/junegunn/fzf) A fuzzy finder for Telescope to work.
 
-* [GCC](https://gcc.gnu.org/) A C compiler for treesitter parser compilation and telescope native fuzzy finder
+* [RipGrep](https://github.com/BurntSushi/ripgrep) A text search tool for Telescope text search.
 
-* [CMake](https://cmake.org/download/) For building the telescope native fuzy finder
+* [GCC](https://gcc.gnu.org/) A C compiler for treesitter parser compilation and Telescope native fuzzy finder.
 
-> **PS:**  For windows builds you should use the [MinGW](https://www.mingw-w64.org/) toolchain
+* [CMake](https://cmake.org/download/) For building the Telescope native fuzy finder.
+
+> **PS:**  For windows builds use the [MinGW](https://www.mingw-w64.org/) toolchain.
 
 ## Installation
 
