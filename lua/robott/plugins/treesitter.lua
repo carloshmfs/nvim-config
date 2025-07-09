@@ -1,7 +1,7 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = { "nvim-treesitter/playground" },
-    build = function ()
+    build = function()
         local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
         ts_update()
     end,
@@ -42,8 +42,9 @@ return {
         vim.filetype.add({
             pattern = {
                 ['.*%.blade%.php'] = 'blade',
+                ['.*%.vsh'] = 'glsl',
+                ['.*%.fsh'] = 'glsl',
             },
         })
     end
 }
-
