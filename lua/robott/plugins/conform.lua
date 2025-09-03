@@ -4,11 +4,11 @@ return {
         require("conform").setup({
             formatters = {
                 blade_formatter = {
-                    command = require("mason-core.path").bin_prefix("blade-formatter"),
+                    command = vim.fn.stdpath("data") .. 'mason/bin/blade-formatter'
                 },
             },
             formatters_by_ft = {
-                php = { "php_cs_fixer" },
+                php = { "pint" },
                 blade = { "blade-formatter" },
             },
             notify_on_error = true,
