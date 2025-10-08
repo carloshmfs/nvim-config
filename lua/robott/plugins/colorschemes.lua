@@ -52,13 +52,28 @@ return {
             vim.opt.cursorline = true
 
             -- Default to dark theme
-            vim.o.background = "dark"  -- dark | light
+            vim.o.background = "dark" -- dark | light
 
             require("monokai-nightasty").load(opts)
         end,
     },
 
-    { 'navarasu/onedark.nvim' },
+    {
+        'navarasu/onedark.nvim',
+        priority = 1000,
+        opts = {
+            transparent = true,
+            style = 'cool',
+            lualine = {
+                transparent = true
+            }
+        },
+        config = function(_, opts)
+            local onedark = require('onedark')
+            onedark.setup(opts)
+            onedark.load()
+        end
+    },
 
     { 'Mofiqul/dracula.nvim' }
 }
