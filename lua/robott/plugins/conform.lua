@@ -12,16 +12,7 @@ return {
                 blade = { "blade-formatter" },
             },
             notify_on_error = true,
-            format_on_save = function(bufnr)
-                -- Disable with a global or buffer-local variable
-                if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-                    return
-                end
-                return {
-                    timeout_ms = 1000,
-                    lsp_format = "fallback"
-                }
-            end,
+            format_on_save = nil,
         })
 
         vim.api.nvim_create_user_command("Format", function(args)
