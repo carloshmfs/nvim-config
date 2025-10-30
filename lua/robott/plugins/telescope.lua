@@ -12,7 +12,8 @@ return {
                 if vim.loop.os_uname().sysname == "Windows_NT" then
                     cmd = 'cmake -S. -Bbuild -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release'
                 else
-                    cmd = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release'
+                    -- cmd = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release'
+                    cmd = 'make'
                 end
 
                 vim.fn.system(cmd)
