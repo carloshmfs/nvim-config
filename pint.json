@@ -1,0 +1,8 @@
+{
+    "preset": "psr12",
+    "rules": {
+        "no_trailing_whitespace_in_string": true,
+        "no_unreachable_default_argument_value": true
+    }
+}
+

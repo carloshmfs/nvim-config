@@ -6,6 +6,10 @@ return {
                 blade_formatter = {
                     command = vim.fn.stdpath("data") .. 'mason/bin/blade-formatter'
                 },
+                pint = {
+                    command = 'pint',
+                    args = { "--config", vim.fn.stdpath("config") .. "/pint.json" }
+                }
             },
             formatters_by_ft = {
                 php = { "pint" },
@@ -16,7 +20,11 @@ return {
         })
 
         vim.api.nvim_create_user_command("Format", function(args)
+            local onFormat = function(err, did_edit)
+                vim.cmd(":e!")
+            end
             local range = nil
+
             if args.count ~= -1 then
                 local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
                 range = {
@@ -24,8 +32,14 @@ return {
                     ["end"] = { args.line2, end_line:len() },
                 }
             end
-            require("conform").format({ async = true, lsp_format = "fallback", range = range })
+
+            local result = require("conform").format({
+                async = true,
+                lsp_format = "fallback",
+                range = range
+            }, onFormat)
         end, { range = true })
+        
 
 
         vim.api.nvim_create_user_command("FormatDisable", function(args)
