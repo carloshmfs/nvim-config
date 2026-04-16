@@ -6,6 +6,8 @@
 
 * [RipGrep](https://github.com/BurntSushi/ripgrep) A text search tool for Telescope text search.
 
+* [TreeSitter-cli](https://github.com/tree-sitter/tree-sitter) A tool/lib for parsing source code.
+
 * [GCC](https://gcc.gnu.org/) A C compiler for treesitter parser compilation and Telescope native fuzzy finder.
 
 * [CMake](https://cmake.org/download/) For building the Telescope native fuzy finder.
@@ -17,3 +19,7 @@
 ```bash
 git clone https://github.com/carloshmfs/nvim-config.git ~/.config/nvim
 ```
+
+## References
+
+* [https://www.qu8n.com/posts/treesitter-migration-guide-for-nvim-0-12](https://www.qu8n.com/posts/treesitter-migration-guide-for-nvim-0-12) migration method that it was used.
