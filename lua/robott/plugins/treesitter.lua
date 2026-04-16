@@ -1,50 +1,27 @@
 return {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = { "nvim-treesitter/playground" },
+    branch = 'main',
     build = function()
         local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
         ts_update()
     end,
-    opts = {
-        indent = { enable = true }
-    },
     config = function()
-        require('nvim-treesitter.configs').setup({
-            -- A list of parser names, or "all" (the five listed parsers should always be installed)
-            ensure_installed = { "c", "cpp", "javascript", "lua", "vim", "vimdoc", "query", "php", "html" },
-
-            -- Install parsers synchronously (only applied to `ensure_installed`)
-            sync_install = false,
-
-            -- Automatically install missing parsers when entering buffer
-            -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-            auto_install = true,
-
-            highlight = {
-                enable = true,
-            },
-
-            indent = {
-                enable = true
-            },
+        vim.api.nvim_create_autocmd('FileType', {
+            callback = function ()
+                pcall(vim.treesitter.start)
+                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            end
         })
 
-        local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-        parser_config.blade = {
-            install_info = {
-                url = 'https://github.com/EmranMR/tree-sitter-blade',
-                files = { 'src/parser.c' },
-                branch = 'main',
-            },
-            filetype = 'blade'
+        local ensureInstalled = {
+            "c", "cpp", "javascript", "lua", "vim", "vimdoc", "query", "php", "html" 
         }
-
-        vim.filetype.add({
-            pattern = {
-                ['.*%.blade%.php'] = 'blade',
-                ['.*%.vsh'] = 'glsl',
-                ['.*%.fsh'] = 'glsl',
-            },
-        })
+        local alreadyInstalled = require('nvim-treesitter.config').get_installed()
+        local parsersToInstall = vim.iter(ensureInstalled)
+        :filter(function(parser)
+            return not vim.tbl_contains(alreadyInstalled, parser)
+        end)
+        :totable()
+        require('nvim-treesitter').install(parsersToInstall)
     end
 }
