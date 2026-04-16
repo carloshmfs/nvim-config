@@ -22,4 +22,7 @@ git clone https://github.com/carloshmfs/nvim-config.git ~/.config/nvim
 
 ## References
 
-* [https://www.qu8n.com/posts/treesitter-migration-guide-for-nvim-0-12](https://www.qu8n.com/posts/treesitter-migration-guide-for-nvim-0-12) migration method that it was used.
+### Methods that it was used for migrating to v0.12
+
+* [https://www.qu8n.com/posts/treesitter-migration-guide-for-nvim-0-12](https://www.qu8n.com/posts/treesitter-migration-guide-for-nvim-0-12)
+* [https://samuellawrentz.com/blog/nvim-treesitter-archived-neovim-0-12-migration/](https://samuellawrentz.com/blog/nvim-treesitter-archived-neovim-0-12-migration/)
