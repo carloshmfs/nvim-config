@@ -1,18 +1,19 @@
 ## Requirements
 
 * [Nvim](https://github.com/neovim/neovim) This config was made for the v0.10.2.
-
 * [FZF](https://github.com/junegunn/fzf) A fuzzy finder for Telescope to work.
-
 * [RipGrep](https://github.com/BurntSushi/ripgrep) A text search tool for Telescope text search.
-
 * [TreeSitter-cli](https://github.com/tree-sitter/tree-sitter) A tool/lib for parsing source code.
-
 * [GCC](https://gcc.gnu.org/) A C compiler for treesitter parser compilation and Telescope native fuzzy finder.
-
 * [CMake](https://cmake.org/download/) For building the Telescope native fuzy finder.
+* [jdtls](https://github.com/eclipse-jdtls/eclipse.jdt.ls) Eclipse java language server.
 
 > **PS:**  For windows builds use the [MinGW](https://www.mingw-w64.org/) toolchain.
+
+> For Arch linux users, you can use the command below to install all of the above.
+```sh
+yay -Sy fzf ripgrep tree-sitter-cli gcc cmake jdtls
+```
 
 ## Installation
 
